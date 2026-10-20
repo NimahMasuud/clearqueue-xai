@@ -1,7 +1,9 @@
 # ClearQueue: explainable complaint triage for public services
 
 **Challenge:** 04, Explain Which Public Complaint Needs Priority (Track 3: Explainable AI)
+
 **Participant:** Nimatallahi Masuud Kehinde (individual) | GitHub: github.com/NimahMasuud | LinkedIn: linkedin.com/in/nimah-masuud-kehinde
+
 **Event:** AI Innovation Hackathon 2026, Women in AI Research, Innovation & Entrepreneurship Club
 
 ## Problem
@@ -61,13 +63,37 @@ predictions false, 99.7% of predictions unchanged when filler wording changes, a
 coefficient view and LIME on 40 test complaints. Department accuracy is 100% because the synthetic phrases are
 clean; I do not expect that on real data.
 
+## Screenshots
+
+High priority complaint, with the reason, highlighted words and department:
+
+![High priority result](demo/high-priority.png)
+
+High priority: LIME chart, wording change that flips the result, and class probabilities:
+
+![High priority explanations](demo/high-priority-explanations.png)
+
+Low priority complaint, flagged for human review because confidence is below 75%:
+
+![Low priority result](demo/low-priority.png)
+
+Medium priority complaint:
+
+![Medium priority result](demo/medium-priority.png)
+
+![Medium priority explanations](demo/medium-priority-explanations.png)
+
 ## Limitations
 - The data is synthetic, so scores are higher than real-world scores would be. Labels come from a rubric I wrote.
 - Wording far from the training phrases lowers accuracy; vague complaints are flagged for review.
 - Explanations show how the model behaves, not what causes a problem.
 - Subgroup checks cover complaint length and per-department recall only. No real demographic data was used.
 - About a fifth of test complaints are flagged for human review at the current thresholds; they can be tuned in `src/explain.py`.
-
+- The model learns the rubric I wrote, not real-world ground truth. Real deployment would need labels from trained complaint officers.
+- High-priority recall is lower for Waste Management (0.80) and the Electoral Services Desk (0.88), where High examples are rare.
+- The model treats the word "wrong" as a Low-priority signal because it appears mostly in billing complaints in the synthetic data. A dangerous complaint using that word could be underrated.
+- Human review is flagged when priority confidence is below 75% or department confidence is below 60%.
+  
 ## Ethics
 No personal data. Staff stay accountable: the tool supports triage and never decides alone. The electoral category covers
 routine service requests only, with no political content.
@@ -77,4 +103,4 @@ Real complaint data from an open portal (for example NYC 311) for comparison, SH
 Pidgin and Yoruba text, a FastAPI endpoint, and a user study on whether staff find the reasons useful.
 
 ## Credits
-Libraries: scikit-learn, LIME, Streamlit, pandas. Developed with AI coding assistance (Claude), reviewed and run by the author.
+Libraries: scikit-learn, LIME, Streamlit, pandas. I used AI coding assistance for enhancement(Copilot), reviewed and run by the author.
