@@ -1,5 +1,7 @@
 # ClearQueue: explainable complaint triage for public services
 
+**Live demo:** [clearqueue-xai.streamlit.app](https://clearqueue-xai.streamlit.app/)
+
 **Challenge:** 04, Explain Which Public Complaint Needs Priority (Track 3: Explainable AI)
 
 **Participant:** Nimatallahi Masuud Kehinde (individual) | GitHub: github.com/NimahMasuud | LinkedIn: linkedin.com/in/nimah-masuud-kehinde
@@ -98,6 +100,18 @@ Medium priority complaint:
 ## Ethics
 No personal data. Staff stay accountable: the tool supports triage and never decides alone. The electoral category covers
 routine service requests only, with no political content.
+
+## Deployment
+The app is deployed on Streamlit Community Cloud: https://clearqueue-xai.streamlit.app/
+
+To deploy your own copy:
+1. Fork or clone this repository to your own GitHub account (it must be public).
+2. Go to share.streamlit.io, sign in with GitHub and click Create app, then Deploy a public app from GitHub.
+3. Set the repository to your copy of `clearqueue-xai`, the branch to `main` and the main file path to `src/app.py`.
+4. Under Advanced settings, set the Python version to 3.12.
+5. Click Deploy. Dependencies install from `requirements.txt`, where versions are pinned.
+
+The trained model (`models/clearqueue.joblib`) and metrics are committed to the repository, so the app starts without retraining. To rebuild them, run `python src/make_data.py` and `python src/train.py` locally and push the updated files.
 
 ## Future scope
 Real complaint data from an open portal (for example NYC 311) for comparison, SHAP as a third explanation method,
